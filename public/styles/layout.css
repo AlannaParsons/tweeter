@@ -2,11 +2,19 @@
  * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
  * https://css-tricks.com/international-box-sizing-awareness-day/
  * Do not modify these two selectors, please
+
+Style the <main> element to be:
+
+90% of the width of its parent element
+center aligned to the body
+the same background colour as the <body> element
+
  */
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
+  border: 1px solid red;
   box-sizing: inherit;
 }
 
@@ -15,9 +23,19 @@ html {
  */
 
 body {
+  display: flex;
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
+  font-family: "Source Sans 3", sans-serif;
+  flex-direction: column;
+}
+
+main {
+  width: 90%;
+  align-self: center;
+
+
 }
 
 /*

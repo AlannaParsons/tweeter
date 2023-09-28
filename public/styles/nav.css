@@ -1,0 +1,55 @@
+/* 120 pixels in height
+Full width of the viewport
+--#4056A1 as its default background colour
+--#FFFFFF as its default font colour
+<span> within the <nav> uses Bungee as its default font-family
+1.5ems of space on the right and left between the content and the edges
+ */
+
+nav {
+  display: flex;
+  position: fixed;
+  min-height: 120px;
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #4056A1;
+  justify-content: space-between;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+
+ }
+
+.logo {
+  display: flex;
+  font-family: Bungee, sans-serif;
+  font-size: 24px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+ }
+
+.new-tweet {
+  font-family: "Source Sans 3", sans-serif;
+  display: flex;
+  font-size: 18px;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 15px;
+  justify-content: space-around;
+
+ }
+
+ .new-tweet i {
+  text-align: center;
+  color: red;
+
+ }
+
+ .bold {
+  font-weight: bold;
+ }
+
+
+
+
+
+
