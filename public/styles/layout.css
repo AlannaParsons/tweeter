@@ -14,7 +14,7 @@ html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   box-sizing: inherit;
 }
 

@@ -1,0 +1,77 @@
+/*
+      <article>
+      <header>
+        <h2>
+          <span>icon </span>
+          <span>name </span>
+          <span>account </span>
+        </h2>
+      </header>
+      <div class="content">
+        stuffstuffstuff
+      </div>
+      <footer>date icons</footer>
+    </article> */
+
+
+#tweets-container article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f1ec;
+  border: 3px solid #545149;
+
+
+}
+
+article {
+  /* padding-bottom: 0.5rem; */
+  margin-bottom: 0.5rem;
+
+}
+
+
+article header {
+  display: flex;
+  padding: 1rem;
+
+  width: 100%;
+  font-size: 20px;
+  justify-content: space-between;
+
+}
+
+#account {
+  color: lightgrey;
+}
+
+article footer {
+  display: flex;
+  width: 98%;
+  font-size: 8px;
+  padding: 0.5rem;
+  justify-content: space-between;
+  border-top: 3px solid #545149;
+}
+
+.content {
+  font-weight: bold;
+  font-size: 12px;
+  width: 95%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+
+}
+
+#tweets-container article:hover {
+  box-shadow: 10px 5px 5px lightgrey;;
+}
+
+#icons {
+  color: #4056A1;
+}
+
+footer [class^="fa-"]:hover  {
+  color:darkgoldenrod
+}

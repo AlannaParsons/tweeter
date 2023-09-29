@@ -17,12 +17,12 @@
     font-weight: bold;
 
 
-
   }
 
   textarea {
+    border: 0px;
     background: transparent;
-    border-bottom: 2px solid;
+    border-bottom: 3px solid #545149;
   }
 
   button {
@@ -34,7 +34,13 @@
   .button-counter {
     display: flex;
     padding-top: 10px;
+    padding-bottom: 10px;
     justify-content: space-between;
+    align-content: center;
     font-family: Bungee, sans-serif;
 
+  }
+
+  .counter {
+    align-self: center;
   }
