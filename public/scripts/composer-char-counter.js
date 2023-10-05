@@ -6,10 +6,9 @@
 //If users exceed the 140 character limit, the counter should appear red
 
 $(document).ready(function() {
-  console.log('JS READY')
-  const maxCharCount = 140;
+  //console.log('JS READY')
 
-  const $tweetText = document.querySelector('#tweet-text')
+  const $tweetText = document.querySelector('#tweet-text');
 
   $tweetText.addEventListener('input', function (event) {
     event.preventDefault();
@@ -18,7 +17,7 @@ $(document).ready(function() {
     const $charCounter = $tweetFrm.children(".button-counter").children(".counter");
 
     //set char counter to current length given by this.value
-    $charCounter.val(maxCharCount-(this.value).length);
+    $charCounter.val((CONSTANTS.MAX_CHAR_COUNT)-(this.value).length);
 
     if ($charCounter.val() <= 0){
       $charCounter.css("color", "red");

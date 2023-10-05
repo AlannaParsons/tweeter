@@ -20,14 +20,20 @@
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
     <link rel="stylesheet" href="/styles/tweet-container.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js" integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- App JS -->
+    <script type="text/javascript" src="/scripts/constants.js"></script>
     <script type="text/javascript" src="/scripts/client.js"></script>
     <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
-    <script type="text/javascript" src="/scripts/tweet-container.js"></script>
+    <script type="text/javascript" src="/scripts/hidden-form.js"></script>
+    <script type="text/javascript" src="/scripts/on-scroll.js"></script>
+
+
   </head>
 
   <body>
@@ -35,18 +41,17 @@
     <nav>
       <span class="logo">tweeter</span>
 
-      <div class="new-tweet">
+      <button id="new-tweet-button">
         <div>
         <span class="bold">Write</span> a new tweet
         </div>
-        <br>
-        <i class="fa-solid fa-angles-down"></i>
-      </div>
+        <i class="fa-solid fa-angles-down" id="down-arrows"></i>
+      </button>
 
     </nav>
 
-    <section id="primary-header">
-      <header>
+    <section >
+      <header id="primary-header">
         <div>
             <img src="/images/profile-hex.png">
         </div>
@@ -61,41 +66,29 @@
     <main class="container">
 
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
+        <div id="error-popup">
+          &#9888
+          <span id="error-message"> </span>
+          &#9888
+        </div>
         <form id="tweet-form">
           <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text"></textarea>
           <div class="button-counter">
-            <button type="submit">Tweet</button>
+            <button type="submit" id="submit-button">Tweet</button>
             <output name="counter" class="counter" for="tweet-text">140</output>
           </div>
         </form>
       </section>
 
       <section id="tweets-container">
-        <article>
-          <header>
-            <span id="icon-name">
-              <i class="fa-solid fa-user"></i>
-              name
-            </span>
-            <span id="account">account </span>
-          </header>
-          <div class="content">
-            stuffstuffstuff
-          </div>
-          <footer>
-            <span>date</span>
-            <span id="icons">
-              <i class="fa-solid fa-heart"></i>
-              <i class="fa-solid fa-flag"></i>
-              <i class="fa-solid fa-repeat"></i>
-            </span>
 
-          </footer>
-        </article>
       </section>
 
     </main>
+
+    <footer id="primary-footer">
+      <button id="footer-button"> <i class="fa-solid fa-circle-chevron-up"></i> </button>
+    </footer>
   </body>
 </html>

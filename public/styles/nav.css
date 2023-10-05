@@ -12,10 +12,11 @@ nav {
   min-height: 120px;
   width: 100%;
   color: #FFFFFF;
-  background-color: #4056A1;
+  background-color: transparent;
   justify-content: space-between;
   padding-left: 1.5em;
   padding-right: 1.5em;
+  padding-bottom: 10px;
 
  }
 
@@ -24,19 +25,40 @@ nav {
   font-family: Bungee, sans-serif;
   font-size: 24px;
   align-items: flex-end;
-  margin-bottom: 10px;
  }
 
-.new-tweet {
+#new-tweet-button {
   font-family: "Source Sans 3", sans-serif;
   display: flex;
   font-size: 18px;
+  background-color: transparent;
+  color: #FFFFFF;
   flex-direction: column;
-  align-self: center;
-  margin-top: 15px;
-  justify-content: space-around;
+
+  justify-content: center;
+  /* margin-top: 15px; */
+  /* justify-content: space-around; */
+  border: none;
 
  }
+
+ #down-arrows {
+  align-self: center;
+ }
+
+ #new-tweet-button #down-arrows:hover{
+  color: #ad1515;
+  animation: moveUpDown ease-in-out 2s infinite;
+ }
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
 
  .new-tweet i {
   text-align: center;
