@@ -1,46 +1,41 @@
 /*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
+  Client handles bulk of application:
+    creating, validating and loading new tweets (break up?)
+    when tweet is posted, tweet added to data, tweets reloaded w added data
 
+  to do:
+    replace console logs with proper standard response code? not to spec?
 */
-//
-//format(tweet.created_at, 'en_US');
-//createTweetElement
-//const timeago = require('timeago.js');
-
 
 $(() => {
-  //bad prectice?? dont know cant b good
-  //$('#error-popup').hide();
-
 
   const createTweetSkeleton = (tweet) => {
     const $tweet = $(`
       <article class="tweet-container">
         <header>
-          <span id="icon-name">
+          <span class="icon-name">
             <img src = "${tweet.user.avatars}" alt = "<i class="fa-solid fa-user"></i>
+            &nbsp
             ${tweet.user.name}
           </span>
-          <span id="account"> ${tweet.user.handle} </span>
+          <span class="account"> ${tweet.user.handle} </span>
         </header>
         <div class="content">
           ${tweet.content.text}
         </div>
         <footer>
           <span>${timeago.format(tweet.created_at, 'en_US')}</span>
-          <span id="icons">
-            <i class="fa-solid fa-heart"></i>
-            <i class="fa-solid fa-flag"></i>
-            <i class="fa-solid fa-repeat"></i>
-          </span>
+          <ul class="icons">
+            <li><i class="fa-solid fa-heart"></i></li>
+            <li><i class="fa-solid fa-flag"></i></li>
+            <li><i class="fa-solid fa-repeat"></i></li>
+          </ul>
         </footer>
       </article>
     `);
 
     return $tweet;
-  };
+  }
 
   const postTweet = (txtData) => {
     $.ajax ({
@@ -48,31 +43,13 @@ $(() => {
       url: '/tweets',
       data: txtData,
       success: () => {
-        console.log('post request resolved successfully');
         loadTweets();
-        //loadTweets();
+      },
+      error: function(request,status,errorThrown) {
+        alert("An error occurred: " & request, status, errorThrown);
       }
     })
   }
-
-    /**
-   * renderTweets(data) - sends all tweet objects to the DOM
-   *
-   * move into load tweets logic????
-   * @param {array} data - array of objects
-   * @return {undefined}
-  * */
-     const renderTweets = (data) => {
-      const $tweetsContainer = $('#tweets-container')
-      $tweetsContainer.empty();
-      for (let snglTweet of data){
-        const $snglTweet = createTweetSkeleton(snglTweet);
-
-
-        $tweetsContainer.prepend($snglTweet);
-      }
-    }
-
 
   /**
    * loadTweets() - use ajax to dynamicly load all tweets
@@ -80,56 +57,70 @@ $(() => {
    * @return {undefined}
    * */
    const loadTweets = () => {
-
     $.ajax ({
       method: 'GET',
       url: '/tweets',
       success: (getdata) => {
         renderTweets(getdata);
-        console.log('success get');
+      },
+      error: function(request,status,errorThrown) {
+        alert("An error occurred: " & request, status, errorThrown);
       }
-
     })
   }
 
+    /**
+   * renderTweets(data) - sends all tweet objects to the DOM
+   *
+   * beyond scope - data would be connected to database
+   * @param {array} data - array of objects
+   * @return {undefined}
+  * */
+  const renderTweets = (data) => {
+    $('#tweets-container').empty();
+    for (let snglTweet of data){
+      const $snglTweet = createTweetSkeleton(snglTweet);
 
+      $('#tweets-container').prepend($snglTweet);
 
-  //i am mad
-  const $tweetForm = $('#tweet-form');
+      //add interactive icons to tweets
+      addOnClick();
+    }
+  }
 
-  $tweetForm.on('submit', (event) => {
+ /**
+   * tweetForm.on('submit' - if input is valid, post tweet.
+   * reset form only on successful submit
+   *
+   * @return {undefined}
+   * */
+  $('#tweet-form').on('submit', (event) => {
     event.preventDefault();
+
     //reset error popup if needed
     $('#error-popup').hide();
 
-    const safeData = `${escape($tweetForm.serialize())}`;
+    const safeData = `${escape($('#tweet-form').serialize())}`;
     let inputtxt = $("#tweet-text").val();
 
     if (validation(inputtxt).length <= 0){
-      //make post tweet modular??
       postTweet(safeData);
-
-
+      $('#tweet-form').trigger('reset');
+      $('html, body').animate({
+        scrollTop: $('#tweets-container').offset().top - (CONSTANTS.SCROLL_PADDING)
+      }, 1000);
     } else {
       console.log ('error occurred in validation')
-
     }
-    $tweetForm.trigger("reset");
-
   })
 
-
-
-
-
+  // ALL THE MAGIC HAPPENS HERE
   loadTweets();
+})
 
+// *******************  HELPERS  ********************
 
-
-
-});
-
-    /**
+/**
    * validation(input) - Implement validation before sending the
    * form data to the server. If any criterion of your validation
    * is not met, then you should notify the user by rendering a
@@ -143,8 +134,6 @@ $(() => {
    * @return {string} - empty or string containing error msg
    *      - .length to check for error
    * */
-
-//
 const validation = (input) => {
   let errMessage = '';
   if (!input) {
@@ -154,35 +143,42 @@ const validation = (input) => {
   else if (input.length > CONSTANTS.MAX_CHAR_COUNT){
     errMessage = 'text too long';
     errorHandler(errMessage);
-
   }
   return errMessage;
-};
+}
 
-
+/**
+ * errorHandler - provide pop up error message for user based on validation()
+ *
+ * @return {undefined} -
+ * */
 const errorHandler = (errMessage) => {
-  $('#errorPopup').children('#error-message').html(errMessage)
-  $('#errorPopup').slideDown('slow');
+  $('#error-popup').children('#error-message').html(errMessage);
+  $("#error-popup").css("display","flex");
+
+  $('html, body').animate({
+    scrollTop: $("#error-popup").offset().top - (CONSTANTS.SCROLL_PADDING)
+  }, 1000);
 }
 
 const escape = function (str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
-};
+}
 
-
-
-
-
-// {
-//   "user": {
-//     "name": "Newton",
-//     "avatars": "https://i.imgur.com/73hZDYK.png",
-//       "handle": "@SirIsaac"
-//     },
-//   "content": {
-//       "text": "If I have seen further it is by standing on the shoulders of giants"
-//     },
-//   "created_at": 1461116232227
-// }
+/**
+ * addOnClick - add event listeners for dynamic elements
+ *
+ * specific to work with icons present on tweets (refactor?)
+ * event listener currently changes icon color, may add additional functionality
+ *
+ * @return {undefined} -
+ * */
+const addOnClick = function () {
+  $('.icons li').each(function(){
+    $(this).on('click', () => {
+      $(this).toggleClass('clicked');
+    });
+  });
+}

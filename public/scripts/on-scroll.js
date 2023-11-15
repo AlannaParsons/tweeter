@@ -1,23 +1,24 @@
-$(document).ready(function() {
+/*
+  When user scrolls, new tweet button disappears (to spec. functional??)
+  May also use button to tranverse instantly to top of page
+*/
 
-  const $footer = document.querySelector('#primary-footer');
+$(() => {
 
   // When the user scrolls down 30px from the top of the document, show the button
   window.onscroll = function() {scrollFunction()};
 
-
   $('#footer-button').on('click', function (event) {
     event.preventDefault();
     topFunction();
-
   })
 
   function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      $footer.style.display = "flex";
+    if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+      $('#footer-button').slideDown('slow');
       $('#new-tweet-button').slideUp('slow');
     } else {
-      $footer.style.display = "none";
+      $('#footer-button').slideUp('slow');
       $('#new-tweet-button').slideDown('slow');
     }
   }
@@ -27,9 +28,6 @@ $(document).ready(function() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
-
-
-
 });
 
 

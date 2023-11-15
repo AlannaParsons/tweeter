@@ -1,0 +1,33 @@
+/* Desktop styles */
+
+@media only screen and (min-width: 1024px) {
+  nav {
+    background-color: #4056A1;
+  }
+
+  #primary-header {
+    display: flex;
+    justify-self: flex-start;
+    width: 25rem;
+    height: 25rem;
+    color: #191818;
+    background-color: #d1a547;
+    margin: 2rem;
+    margin-left: 3em;
+    align-items: center;
+    flex-direction: column;
+
+    background-image: url(http://www.transparenttextures.com/patterns/brick-wall.png);
+   }
+
+   main {
+    flex-direction: row;
+    align-content: flex-start;
+    margin-top: 5em;
+    justify-content: space-evenly;
+   }
+
+   section {
+    flex-grow: 1;
+   }
+}

@@ -3,12 +3,6 @@
  * https://css-tricks.com/international-box-sizing-awareness-day/
  * Do not modify these two selectors, please
 
-Style the <main> element to be:
-
-90% of the width of its parent element
-center aligned to the body
-the same background colour as the <body> element
-
  */
 html {
   box-sizing: border-box;
@@ -32,12 +26,14 @@ body {
 }
 
 main {
-  width: 90%;
-  align-self: center;
-
-
+  display: flex;
+  flex-direction: column;
 }
 
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
+section {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}

@@ -7,11 +7,12 @@
   justify-content: flex-end;
   background-color: transparent;
   position: fixed;
+  pointer-events: none;
  }
 
  #footer-button {
   color: #ad1515;
   background-color: transparent;
   border: none;
-
+  pointer-events: auto;
  }

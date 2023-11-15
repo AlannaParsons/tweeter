@@ -1,12 +1,18 @@
-$(document).ready(function() {
+/*
+  make responsive tweetform that can be hidden until user reveals w
+  new-tweet-button, click also scrolls to tweet form
+  only works once, no need to rehide elem
+*/
 
-  const $newTweetAccess = document.querySelector('#new-tweet-button');
+$(() => {
 
-  $newTweetAccess.addEventListener('click', function (event) {
+  $('#new-tweet-button').on('click', function (event) {
     event.preventDefault();
-    const $tweetForm = document.querySelector('#tweet-form');
+    $('#tweet-form').css('display','flex');
 
-    $tweetForm.style.display = $tweetForm.style.display === 'flex' ? 'none' : 'flex';
-
+    $('html, body').animate({
+      scrollTop: $('#tweet-form').offset().top - (CONSTANTS.SCROLL_PADDING)
+    }, 1000);
   })
+
 });
